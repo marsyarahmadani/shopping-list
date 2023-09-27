@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+    <nav class="navbar" style="background-color: #e0fff9;">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Nama : {{name}}</a>
+        <a href="{% url 'main:logout' %}" class="ml-auto">
+            <button class="btn btn-outline-danger" type="button">Logout</button>
+        </a>
+        </div>
+    </nav>
+
+
     <h1>Shopping List Page</h1>
 
     <h5>Name:</h5>
@@ -21,12 +32,58 @@
 
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
+    <p></p>
+        <head>
+            <style>
+                table {
+                    width:110%;
+                    border:1px solid #b3adad;
+                    border-collapse:collapse;
+                    padding:5px;
+                }
+                table th {
+                    border:1px solid #b3adad;
+                    padding:5px;
+                    background: #e0fff9;
+                    color: #4e4646;
+                }
+                table td {
+                    border:1px solid #b3adad;
+                    text-align:center;
+                    padding:5px;
+                    background: #ffffff;
+                    color: #4d4d4d;
+                }
+                table td {
+                    border:1px solid #b3adad;
+                    text-align:center;
+                    padding:5px;
+                    background: #ffffff;
+                    color: #4d4d4d;
+                }
+            </style>
+
+        </head>
+
     {% for product in products %}
         <tr>
             <td>{{product.name}}</td>
             <td>{{product.price}}</td>
             <td>{{product.description}}</td>
             <td>{{product.date_added}}</td>
+            <td>
+                <a href="{% url 'main:edit_product' product.pk %}">
+                    <button>
+                        Edit
+                    </button>
+                </a>
+                <a href="{% url 'main:delete_product' product.pk %}">
+                      <button>
+                          Delete
+                      </button>
+                  </a>
+            </td>
+            
         </tr>
     {% endfor %}
 </table>
@@ -40,10 +97,6 @@
 </a>
 <br />
 <br />
-<a href="{% url 'main:logout' %}">
-    <button>
-        Logout
-    </button>
-</a>
+
 
 {% endblock content %}
