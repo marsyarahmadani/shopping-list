@@ -1,8 +1,9 @@
 import datetime
+import json
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages  
-from django.http import HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect, JsonResponse
 from main.forms import ProductForm
 from django.urls import reverse
 from django.shortcuts import render
@@ -12,6 +13,8 @@ from django.core import serializers
 from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import logout as auth_logout
+
 
 # Create your views here.
 @login_required(login_url='/login')
@@ -150,3 +153,4 @@ def create_product_flutter(request):
         return JsonResponse({"status": "success"}, status=200)
     else:
         return JsonResponse({"status": "error"}, status=401)
+
